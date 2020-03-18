@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+  dapperanddocker:
+    image: ${DOCKER_REGISTRY-}dapperanddocker
+    container_name: ASPNET_Core_API
+    build:
+      context: .
+      dockerfile: DapperAndDocker/Dockerfile
+    networks:
+      - dev
+
+  mssql:
+    image: "mcr.microsoft.com/mssql/server"
+    container_name: SQL_Server
+    restart: always
+    environment:
+      SA_PASSWORD: "Pass123!"
+      ACCEPT_EULA: "Y"
+    ports:
+      - 1433:1433
+    networks:
+          - dev
+
+  redis:
+    image: redis
+    container_name: Redis_Cache
+    ports:
+      - "6379:6379"
+    networks:
+      - dev
+
+networks:
+  dev:
+    # actually this is the default
+    driver: bridge

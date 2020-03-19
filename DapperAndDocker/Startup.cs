@@ -2,6 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DapperAndDocker.Services.CustomerOrders;
+using DapperAndDocker.Services.CustomerOrders.Queries;
+using DapperAndDocker.Services.Customers;
+using DapperAndDocker.Services.Customers.Queries;
+using DapperAndDocker.Services.ExecuteCommands;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,7 +30,13 @@ namespace DapperAndDocker
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddSingleton<ICustomerRepository, CustomerRepository>();
+            services.AddSingleton<ICustomerOrderRepository, CustomerOrderRepository>();
+            services.AddTransient<ICustomerCommandText, CustomerCommandText>();
+            services.AddTransient<ICustomerOrderCommandText, CustomerOrderCommandText>();
+            services.AddScoped<IExecuters, Executers>();
+            
+            services.AddControllers().AddControllersAsServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

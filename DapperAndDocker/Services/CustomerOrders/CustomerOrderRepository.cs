@@ -31,8 +31,7 @@ namespace DapperAndDocker.Services.CustomerOrders
         public IList<CustomerOrderDetailModel> GetList()
         {
             using var scope = _service.CreateScope();
-
-             var executers = scope.ServiceProvider.GetRequiredService<IExecuters>();
+            var executers = scope.ServiceProvider.GetRequiredService<IExecuters>();
             var query = executers.ExecuteCommand(_connStr,
                     conn => conn.Query<CustomerOrderDetailModel>(_commandText.GetCustomerOrders))
                 .ToList();

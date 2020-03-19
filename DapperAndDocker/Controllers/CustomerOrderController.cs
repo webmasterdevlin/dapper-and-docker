@@ -8,18 +8,10 @@ namespace DapperAndDocker.Controllers
     [Route("api/customer-orders")]
     public class CustomerOrderController : ControllerBase
     {
-        private readonly ICustomerOrderRepository _repo;
-        
-        public CustomerOrderController(ICustomerOrderRepository repo)
-        {
-            _repo = repo;
-        }
-
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult Get()
+        public IActionResult Get([FromServices] ICustomerOrderRepository service)
         {
-            return Ok(_repo.GetList());
+            return Ok(service.GetList());
         }
     }
 }

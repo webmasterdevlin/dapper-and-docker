@@ -7,6 +7,7 @@ using DapperAndDocker.Services.CustomerOrders.Queries;
 using DapperAndDocker.Services.Customers;
 using DapperAndDocker.Services.Customers.Queries;
 using DapperAndDocker.Services.ExecuteCommands;
+using DapperAndDocker.Services.Items;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +33,7 @@ namespace DapperAndDocker
         {
             services.AddSingleton<ICustomerRepository, CustomerRepository>();
             services.AddSingleton<ICustomerOrderRepository, CustomerOrderRepository>();
+            services.AddSingleton<IItemRepository, ItemRepository>();
             services.AddTransient<ICustomerCommandText, CustomerCommandText>();
             services.AddTransient<ICustomerOrderCommandText, CustomerOrderCommandText>();
             services.AddScoped<IExecuters, Executers>();

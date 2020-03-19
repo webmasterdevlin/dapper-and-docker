@@ -1,5 +1,8 @@
 namespace DapperAndDocker.Services.Customers.Queries
 {
+    /// <summary>
+    /// Using Store Procedures
+    /// </summary>
     public class CustomerCommandText : ICustomerCommandText
     {
         public string GetCustomers => "Customer_GetList";

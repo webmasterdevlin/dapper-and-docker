@@ -1,7 +1,10 @@
+using System.Collections.Generic;
+using DapperAndDocker.Models;
+
 namespace DapperAndDocker.Services.Items
 {
-    public class IItemRepository
+    public interface IItemRepository
     {
-        
+        List<ItemModel> GetList();
     }
 }

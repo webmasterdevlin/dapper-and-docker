@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
 using DapperAndDocker.Models;
@@ -20,21 +18,20 @@ namespace DapperAndDocker.Services.Customers
         private readonly IServiceProvider _service;
         private readonly string _connStr;
 
-
-        public CustomerRepository(IConfiguration configuration, ICustomerCommandText commandText, IServiceProvider service)
+        public CustomerRepository(IConfiguration configuration, ICustomerCommandText commandText,
+            IServiceProvider service)
         {
             _commandText = commandText;
             _service = service;
             _configuration = configuration;
             _connStr = _configuration.GetConnectionString("CustomerOrderViewer");
-       
         }
 
         public IList<CustomerModel> GetList()
         {
             using var scope = _service.CreateScope();
             var executers = scope.ServiceProvider.GetRequiredService<IExecuters>();
-            
+
             var query = executers.ExecuteCommand(_connStr, conn => conn.Query<CustomerModel>(_commandText.GetCustomers))
                 .ToList();
 

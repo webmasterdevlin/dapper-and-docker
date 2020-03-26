@@ -11,15 +11,13 @@ namespace DapperAndDocker.Services.Items
 {
     public class ItemRepository : IItemRepository
     {
-        private readonly IConfiguration _configuration;
         private readonly IServiceProvider _service;
         private readonly string _connStr;
         
         public ItemRepository(IConfiguration configuration, IServiceProvider service)
         {
-            _configuration = configuration;
             _service = service;
-            _connStr = _configuration.GetConnectionString("CustomerOrderViewer");
+            _connStr = configuration.GetConnectionString("CustomerOrderViewer");
         }
 
         public List<ItemModel> GetList()

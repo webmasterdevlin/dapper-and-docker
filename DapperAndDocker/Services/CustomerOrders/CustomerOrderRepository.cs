@@ -12,18 +12,15 @@ namespace DapperAndDocker.Services.CustomerOrders
 {
     public class CustomerOrderRepository : ICustomerOrderRepository
     {
-        private readonly IServiceProvider _service;
-        private readonly IConfiguration _configuration;
         private readonly ICustomerOrderCommandText _commandText;
+        private readonly IServiceProvider _service;
         private readonly string _connStr;
 
         public CustomerOrderRepository(IConfiguration configuration, ICustomerOrderCommandText commandText,
            IServiceProvider service)
         {
             _commandText = commandText;
-            _configuration = configuration;
-            _connStr = _configuration.GetConnectionString("CustomerOrderViewer");
-
+            _connStr = configuration.GetConnectionString("CustomerOrderViewer");
             _service = service;
         }
         
